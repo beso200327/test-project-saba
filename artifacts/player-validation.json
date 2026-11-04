@@ -1,0 +1,20 @@
+{
+  "frameRateDistances": {
+    "15": 9.139999999999809,
+    "30": 9.139999999999809,
+    "60": 9.139999999999809,
+    "120": 9.139999999999809
+  },
+  "diagonalDistance": 9.14000000000044,
+  "boundarySlides": 19,
+  "chestStop": -17.793238138102293,
+  "traversalSteps": 1613,
+  "finalArenaReachable": true,
+  "frameDropCollision": true,
+  "cameraFollow": true,
+  "touchJoystick": true,
+  "keyboardDirections": true,
+  "blurClearsKeys": true,
+  "typingIgnored": true,
+  "errors": []
+}

@@ -1,0 +1,6 @@
+import * as T from 'three';import {createArcher} from './character';import {createCollision} from './collision';
+export function createPlayer(environment:T.Group){const character=createArcher(),collision=createCollision(environment);const velocity=new T.Vector2();let distance=0;
+ function reset(){character.root.position.set(0,.2,64);character.root.rotation.y=0;velocity.set(0,0)}reset();
+ function update(dt:number,input:T.Vector2){dt=Math.min(Math.max(dt,0),.5);const steps=Math.max(1,Math.ceil(dt/(1/120)));const h=dt/steps;for(let i=0;i<steps;i++){const target=input.clone().multiplyScalar(4.8);const acceleration=input.lengthSq()>0?24:32;const delta=target.sub(velocity);delta.clampLength(0,acceleration*h);velocity.add(delta);const old=character.root.position.clone();collision.move(character.root.position,velocity.x*h,velocity.y*h);const moved=character.root.position.clone().sub(old);distance+=moved.length();if(moved.lengthSq()>1e-9){const angle=Math.atan2(-moved.x,-moved.z),current=character.root.rotation.y;character.root.rotation.y=current+Math.atan2(Math.sin(angle-current),Math.cos(angle-current))*(1-Math.exp(-18*h))}character.animate(h,moved.length()/h)}}
+ return{...character,collision,velocity,reset,update,get distance(){return distance}};
+}

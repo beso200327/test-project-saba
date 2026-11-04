@@ -22,3 +22,13 @@ All exportable objects belong to `levelRoot`, grouped into Terrain, Forest bound
 `npm run validate` uses Playwright and `/usr/bin/chromium` with software WebGL to capture desktop/mobile views, exercise orbit/reset, create `artifacts/forest-level.glb` and `artifacts/forest-level.png`, and reload the GLB into a fresh scene. Results, actual triangle/draw-call counts and console errors are in `artifacts/validation.json`. Chromium executable path can be adjusted in `scripts/validate.mjs` for another machine. Draw calls include the shadow pass; hardware frame-rate performance is not established by software rendering.
 
 Use the existing checkout in each isolated cloud task; no additional worktree is needed. Live preview processes must be restarted in new tasks.
+
+## Archer movement prototype
+
+Click **Play** for a north-up overhead follow camera. WASD moves relative to the screen; diagonal input is normalized. On touch devices, drag the lower-left joystick. **Reset Player** returns to the southern clearing. Top View and Inspect pause movement and clear input. Switching tabs clears held keys. Typing in fields does not move the player.
+
+The player remains outside `levelRoot` and is omitted from both environment GLB and clean PNG exports. `character.ts` builds and animates the short-haired male Archer from the upper-left reference: brown swept hair, green scarf/cape/tunic, leather armor, gold trim, boots, bow, quiver and white-fletched arrows. Back/side details are conservative procedural approximations: plain layered cape and cylindrical leather quiver, simplified armor, face, hair locks and bow engravings. No other character classes or combat systems are included.
+
+`input.ts` owns keyboard and touch input; `movement.ts` integrates acceleration/deceleration at up to 120 Hz, smooth facing and idle/walk animation; `collision.ts` samples a 0.48-unit-radius footprint against the existing walkable outline and derived trunk/rock/chest obstacles. Movement is subdivided to at most 0.08 units with tangent sliding. Frame gaps above 0.5 seconds are capped to avoid jumps after long suspension. `camera.ts` owns Play/Top/Inspect projections and smooth following.
+
+Run `node scripts/validate-player.mjs` with the local dev server active for interaction and traversal checks. This uses the same Chromium setup as `npm run validate`. Evidence and screenshots are in `artifacts/player-validation.json`, `play-mode.png`, `player-mobile.png`, and `archer-closeup.png`. Synthetic input and software WebGL checks do not substitute for physical mobile-device performance testing.
