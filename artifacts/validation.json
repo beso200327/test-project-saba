@@ -1,0 +1,36 @@
+{
+  "validation": {
+    "meshes": 1036,
+    "triangles": 93032,
+    "min": [
+      -25.076650968541287,
+      -1.7,
+      -76.99279519635058
+    ],
+    "max": [
+      25.1850897333926,
+      6.788612912380017,
+      75.44377550687238
+    ],
+    "bytes": 1228768
+  },
+  "stats": {
+    "triangles": 178848,
+    "calls": 44
+  },
+  "errors": [],
+  "cameraReset": true,
+  "walkability": {
+    "minimumCorridorWidth": 13.2,
+    "treeObstructions": 0,
+    "areaOrder": [
+      "Starting area",
+      "First combat arena",
+      "Winding forest corridor",
+      "Mini-boss arena",
+      "Treasure area",
+      "Connecting passage",
+      "Final boss arena"
+    ]
+  }
+}
